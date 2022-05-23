@@ -15,7 +15,7 @@ func main() {
 	defer f.Close()
 
 	sum := 0
-	slice := make([]int, 10)
+	slc := make([]int, 0)
 	s := bufio.NewScanner(f)
 	for s.Scan() {
 		var n int
@@ -23,10 +23,10 @@ func main() {
 		if err != nil {
 			log.Fatalf("could not read %s: %v", s.Text(), err)
 		}
-		slice = append(slice, n)
+		slc = append(slc, n)
 	}
-	for i := 0; i < len(slice[11:])-1; i++ {
-		if slice[i] < slice[i+1] {
+	for i := 0; i < len(slc)-1; i++ {
+		if slc[i] < slc[i+1] {
 			sum += 1
 		}
 	}
@@ -34,5 +34,4 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Println(sum)
-	fmt.Println(len(slice) - 10)
 }
