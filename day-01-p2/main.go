@@ -14,9 +14,6 @@ func main() {
 	}
 	defer f.Close()
 
-	sum := 0
-	count := 0
-	finalSlice := make([]int, 0)
 	slc := make([]int, 0)
 	s := bufio.NewScanner(f)
 	for s.Scan() {
@@ -27,20 +24,19 @@ func main() {
 		}
 		slc = append(slc, n)
 	}
-	for i := 0; i < len(slc)-3; i++ {
-		sum = slc[i] + slc[i+2] + slc[i+3]
-
-		finalSlice = append(finalSlice, sum)
-	}
 	
-	for i := 0; i < len(finalSlice)-1; i++ {
-		
-		if finalSlice[i] < finalSlice[i+1] {
-			count += 1
+	sum := 0
+	depth := slc[0] + slc[1] + slc[2]
+
+	for i := 0; i < len(slc) - 2; i++ {
+		if  slc[i] + slc[i+1] + slc[i+2] > depth{
+			sum += 1
 		}
+		depth = slc[i] + slc[i+1] + slc[i+2]
 	}
+	fmt.Println(sum)
+	
 	if err := s.Err(); err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(count)
 }
