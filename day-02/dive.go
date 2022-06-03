@@ -18,17 +18,17 @@ func main() {
 	var n int
 	var str string
 
-	type steps []submarineInstrucs
+	type file []submarineInstrucs
 
-	step := steps{}
+	slc := file{}
 	for s.Scan() {
 		_, err := fmt.Sscanf(s.Text(), "%s %d", &str, &n)
 		if err != nil {
 			log.Fatalf("could not read %s: %v", s.Text(), err)
 		}
-		step = append(step, submarineInstrucs{str, n}, submarineInstrucs{str, n})
+		slc = append(slc, submarineInstrucs{str, n}, submarineInstrucs{str, n})
 	}
-	fmt.Println(step)
+	fmt.Println(slc)
 
 }
 
